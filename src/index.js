@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 
 class App extends React.Component {
 
-	state = { lat: 40, errorMesssage: ''};
+	state = { lat: null, errorMesssage: ''};
 
 	componentDidMount() {
 		window.navigator.geolocation.getCurrentPosition(
@@ -20,16 +21,14 @@ class App extends React.Component {
 
 	render() {
 		if(this.state.errorMesssage && !this.state.lat) {
+
 			return <div>Error {this.state.errorMesssage}</div>
 		} else if(!this.state.errorMesssage && this.state.lat) {
 			return <SeasonDisplay lat={this.state.lat} />
 
 		} else {
-
 		return (
-			<div>
-				Loading
-			</div>
+			<Spinner/>
 		);
 	}
 	}
